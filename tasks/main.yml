@@ -17,4 +17,7 @@
       ansible.builtin.unarchive:
         src: "{{ download_location }}"
         dest: "{{ installation_home }}"
+        extra_opts:
+          - --transform
+          - s/^pycharm-.*$/pycharm/
         creates: "{{ installation_home }}/bin/pycharm.sh"
