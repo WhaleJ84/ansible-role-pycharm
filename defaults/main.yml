@@ -2,6 +2,7 @@
 ---
 # defaults file for whalej84.pycharm
 pycharm_url: https://download.jetbrains.com/python/
-pycharm_platform: pycharm-2025.2.3.tar.gz
-download_location: /tmp/pycharm.tar.gz
+pycharm_file: pycharm-2025.2.3
+pycharm_format: .tar.gz
+download_location: /tmp/
 installation_home: /opt

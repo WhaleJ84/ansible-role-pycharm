@@ -7,7 +7,7 @@
   block:
     - name: INSTALL | Ensure pycharm archive is downloaded
       ansible.builtin.get_url:
-        url: "{{ pycharm_url }}{{ pycharm_platform }}"
+        url: "{{ pycharm_url }}{{ pycharm_file }}{{ pycharm_format }}"
         dest: "{{ download_location }}"
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_id }}"
@@ -17,5 +17,5 @@
       become: true
       ansible.builtin.unarchive:
         src: "{{ download_location }}"
-        dest: "{{ installation_home }}/pycharm"
-        creates: "{{ installation_home }}/pycharm/bin/pycharm.sh"
+        dest: "{{ installation_home }}"
+        creates: "{{ installation_home }}/{{ pycharm_file }}/bin/pycharm.sh"
