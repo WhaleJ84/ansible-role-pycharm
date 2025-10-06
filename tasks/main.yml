@@ -11,7 +11,7 @@
         dest: "{{ download_location }}"
         owner: root
         group: root
-        mode: "0777"
+        mode: "0664"
 
     - name: INSTALL | Ensure archive is extracted
       ansible.builtin.unarchive:
