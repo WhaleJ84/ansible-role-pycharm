@@ -1,0 +1,20 @@
+# SPDX-License-Identifier: MIT-0
+---
+# tasks file for whalej84.pycharm
+- name: INSTALL | pycharm
+  tags:
+    - install
+  block:
+    - name: INSTALL | Ensure pycharm archive is downloaded
+      ansible.builtin.get_url:
+        url: "{{ pycharm_url }}{{ pycharm_platform }}"
+        dest: "{{ download_location }}"
+        owner: root
+        group: root
+        mode: "0777"
+
+    - name: INSTALL | Ensure archive is extracted
+      ansible.builtin.unarchive:
+        src: "{{ download_location }}"
+        dest: "{{ installation_home }}"
+        creates: "{{ installation_home }}/bin/pycharm.sh"

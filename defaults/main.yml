@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: MIT-0
+---
+# defaults file for whalej84.pycharm
+pycharm_url: https://www.jetbrains.com/pycharm/download/?section=
+pycharm_platform: linux
+download_location: /tmp/pycharm.tar.gz
+installation_home: /opt/pycharm
