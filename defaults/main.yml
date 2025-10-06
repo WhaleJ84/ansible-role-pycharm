@@ -4,4 +4,4 @@
 pycharm_url: https://download.jetbrains.com/python/
 pycharm_platform: pycharm-2025.2.3.tar.gz
 download_location: /tmp/pycharm.tar.gz
-installation_home: /opt/
+installation_home: /opt
