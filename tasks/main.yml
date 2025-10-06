@@ -9,8 +9,8 @@
       ansible.builtin.get_url:
         url: "{{ pycharm_url }}{{ pycharm_platform }}"
         dest: "{{ download_location }}"
-        owner: root
-        group: root
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
         mode: "0664"
 
     - name: INSTALL | Ensure archive is extracted
