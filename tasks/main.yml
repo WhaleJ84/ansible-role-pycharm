@@ -5,26 +5,34 @@
   tags:
     - install
   block:
-    - name: INSTALL | Ensure pycharm archive is downloaded
-      ansible.builtin.get_url:
-        url: "{{ pycharm_url }}{{ pycharm_file }}{{ pycharm_format }}"
-        dest: "{{ download_location }}"
-        owner: "{{ ansible_user_id }}"
-        group: "{{ ansible_user_id }}"
-        mode: "0664"
+    - name: REGISTER | Check existence of executable shortcut
+      ansible.builtin.stat:
+        path: "{{ installation_home }}/{{ pycharm_file }}/bin/pycharm"
+      register: executable
 
-    - name: INSTALL | Ensure archive is extracted
-      become: true
-      ansible.builtin.unarchive:
-        src: "{{ download_location }}{{ pycharm_file }}{{ pycharm_format }}"
-        dest: "{{ installation_home }}"
-        creates: "{{ installation_home }}/{{ pycharm_file }}/bin/pycharm"
+    - name: BLOCK | Install pycharm
+      when: not executable.stat.exists
+      block:
+        - name: INSTALL | Ensure pycharm archive is downloaded
+          ansible.builtin.get_url:
+            url: "{{ pycharm_url }}{{ pycharm_file }}{{ pycharm_format }}"
+            dest: "{{ download_location }}"
+            owner: "{{ ansible_user_id }}"
+            group: "{{ ansible_user_id }}"
+            mode: "0664"
 
-    - name: INSTALL | Ensure executable shortcut is created
-      ansible.builtin.template:
-        src: jetbrains-pycharm.desktop.j2
-        dest: "{{ pycharm_desktop_dir }}/jetbrains-pycharm.desktop"
-        owner: "{{ ansible_user_id }}"
-        group: "{{ ansible_user_id }}"
-        mode: "0600"
-        validate: /usr/bin/desktop-file-validate %s
+        - name: INSTALL | Ensure archive is extracted
+          become: true
+          ansible.builtin.unarchive:
+            src: "{{ download_location }}{{ pycharm_file }}{{ pycharm_format }}"
+            dest: "{{ installation_home }}"
+            creates: "{{ installation_home }}/{{ pycharm_file }}/bin/pycharm"
+
+        - name: INSTALL | Ensure executable shortcut is created
+          ansible.builtin.template:
+            src: jetbrains-pycharm.desktop.j2
+            dest: "{{ pycharm_desktop_dir }}/jetbrains-pycharm.desktop"
+            owner: "{{ ansible_user_id }}"
+            group: "{{ ansible_user_id }}"
+            mode: "0600"
+            validate: /usr/bin/desktop-file-validate %s
