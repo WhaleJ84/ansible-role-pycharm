@@ -16,6 +16,6 @@
     - name: INSTALL | Ensure archive is extracted
       become: true
       ansible.builtin.unarchive:
-        src: "{{ download_location }}"
+        src: "{{ download_location }}{{ pycharm_file }}{{ pycharm_format }}"
         dest: "{{ installation_home }}"
         creates: "{{ installation_home }}/{{ pycharm_file }}/bin/pycharm.sh"
