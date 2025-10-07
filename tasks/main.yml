@@ -27,3 +27,4 @@
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_id }}"
         mode: "0600"
+        validate: /usr/bin/desktop-file-validate %s
