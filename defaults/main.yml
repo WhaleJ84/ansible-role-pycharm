@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: MIT-0
 ---
 # defaults file for whalej84.pycharm
+pycharm_desktop_dir: "{{ ansible_user_dir }}/.local/share/applications"
 pycharm_url: https://download.jetbrains.com/python/
 pycharm_file: pycharm-2025.2.3
 pycharm_format: .tar.gz

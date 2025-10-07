@@ -19,3 +19,11 @@
         src: "{{ download_location }}{{ pycharm_file }}{{ pycharm_format }}"
         dest: "{{ installation_home }}"
         creates: "{{ installation_home }}/{{ pycharm_file }}/bin/pycharm"
+
+    - name: INSTALL | Ensure executable shortcut is created
+      ansible.builtin.template:
+        src: jetbrains-pycharm.desktop.j2
+        dest: "{{ pycharm_desktop_dir }}/jetbrains-pycharm.desktop"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+        mode: "0600"
